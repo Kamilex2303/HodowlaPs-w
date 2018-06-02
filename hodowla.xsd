@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+ <xs:simpleType name="cenatype">
+		  <xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="2"/>
+		  </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="nabywcatype">
+  <xs:sequence>
+    <xs:element name="imie">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			  <xs:minLength value="3"/>
+			  <xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+    </xs:element>
+
+    <xs:element name="pesel">
+		<xs:simpleType>
+			<xs:restriction base="xs:integer">
+			  <xs:pattern value="\d{11}"/>
+        <xs:pattern value="[0-9]{11}"/>
+			</xs:restriction>
+		</xs:simpleType>
+    </xs:element>
+
+    <xs:element name="email">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			  <xs:pattern value="[^@]+@[^\.]+\..+"/>
+			</xs:restriction>
+		</xs:simpleType>
+    </xs:element>
+
+  </xs:sequence>
+
+   <xs:attribute name="numerPsa" type="xs:string" use="required"/>
+
+
+</xs:complexType>
+
+<xs:complexType name="piestype">
+
+  <xs:sequence>
+
+        <xs:element name="id">
+    		<xs:simpleType>
+    			<xs:restriction base="xs:string">
+            <xs:pattern value="[H][0-9]{3}"/>
+    			</xs:restriction>
+    		</xs:simpleType>
+        </xs:element>
+
+
+    <xs:element name="imie">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			  <xs:minLength value="3"/>
+			  <xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+    </xs:element>
+
+    <xs:element name="wiek" >
+		<xs:simpleType>
+			<xs:restriction base="xs:integer">
+			  <xs:minInclusive value="1"/>
+			  <xs:maxInclusive value="5"/>
+			</xs:restriction>
+     	</xs:simpleType>
+    </xs:element>
+
+    <xs:element name="rasa" >
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			  <xs:enumeration value="Shitzu"/>
+			  <xs:enumeration value="Maltanczyk"/>
+			  <xs:enumeration value="Owczarek niemiecki"/>
+			</xs:restriction>
+		</xs:simpleType>
+    </xs:element>
+
+    <xs:element name="cena" type="cenatype"/>
+
+    <xs:element name="data-wyp">
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:minExclusive value="2018-01-01"/>
+			</xs:restriction>
+		</xs:simpleType>
+    </xs:element>
+
+<xs:element name="lagodny">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+    <xs:pattern value="Tak|Nie"/>
+    </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="psytype">
+  <xs:sequence>
+	<xs:element name="pies" type="piestype" minOccurs="1" maxOccurs="unbounded"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nabywcytype">
+  <xs:sequence>
+	<xs:element name="nabywca" type="nabywcatype" minOccurs="1" maxOccurs="unbounded"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hodowlatype">
+  <xs:sequence>
+	   <xs:element name="psy" type="psytype"/>
+  	 <xs:element name="nabywcy" type="nabywcytype"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:element name="hodowla" type="hodowlatype">
+    <xs:key name="hR">
+      <xs:selector xpath="psy/pies"/>
+      <xs:field xpath="id"/>
+    </xs:key>
+    <xs:keyref name="hRef" refer="hR">
+        <xs:selector xpath="nabywcy/nabywca"/>
+        <xs:field xpath="@numerPsa"/>
+      </xs:keyref>
+</xs:element>
+
+</xs:schema>

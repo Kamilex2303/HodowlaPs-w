@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hodowla>
+<psy>
+  <pies>
+		<id>H345</id>
+		<imie>Tobi</imie>
+		<wiek>3</wiek>
+		<rasa>Shitzu</rasa>
+		<cena>500</cena>
+		<data-wyp>2018-01-04</data-wyp>
+		<lagodny>Tak</lagodny>
+	</pies>
+
+	<pies>
+		<id>H123</id>
+		<imie>Tofik</imie>
+		<wiek>1</wiek>
+		<rasa>Maltanczyk</rasa>
+		<cena>400</cena>
+		<data-wyp>2018-01-03</data-wyp>
+		<lagodny>Tak</lagodny>
+	</pies>
+
+	<pies>
+		<id>H876</id>
+		<imie>Łatek</imie>
+		<wiek>2</wiek>
+		<rasa>Owczarek niemiecki</rasa>
+		<cena>300</cena>
+		<data-wyp>2018-01-02</data-wyp>
+		<lagodny>Tak</lagodny>
+	</pies>
+</psy>
+<nabywcy>
+	<nabywca numerPsa="H876">
+		<imie>Tomasz</imie>
+		<pesel>82020323412</pesel>
+		<email>tomek@email.com</email>
+	</nabywca>
+
+	<nabywca numerPsa="H123">
+		<imie>Jan</imie>
+		<pesel>96090923423</pesel>
+		<email>jan@email.com</email>
+	</nabywca>
+
+	<nabywca numerPsa="H345">
+		<imie>Mikolaj</imie>
+		<pesel>93060418866</pesel>
+		<email>mikolaj@email.com</email>
+	</nabywca>
+</nabywcy>
+
+</hodowla>
